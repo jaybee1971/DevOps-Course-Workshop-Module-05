@@ -26,8 +26,5 @@ services:
     links:
       - redis
 
-networks:
-  redis-net:
-
 volumes:
   redis-cache:
