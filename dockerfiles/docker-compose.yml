@@ -5,14 +5,29 @@ services:
     image: redis
     ports:
       - 6379:6379
-    hostname: redis-host
+    container_name: redis-cache
+    volumes:
+      - redis-cache:/data
   cliapp:
     build:
       context: .
       dockerfile: Dockerfile.cliapp
+    ports:
+      - 6379
+    links:
+      - redis
   webapp:
     build:
       context: .
       dockerfile: Dockerfile.webapp
     ports:
       - "8080:80"
+      - 6379
+    links:
+      - redis
+
+networks:
+  redis-net:
+
+volumes:
+  redis-cache:

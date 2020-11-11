@@ -7,8 +7,8 @@ RUN apt-get update && apt-get install -y \
     && chmod +x webapp
 ENV WEBAPP_PORT=80
 EXPOSE ${WEBAPP_PORT}
-# The data folder should be shared with the cliapp
-ENV REDIS_HOST=redis-host
+# The data is shared via Redis
+ENV REDIS_HOST=redis-cache
 ENV REDIS_PORT=6379
 RUN mkdir /var/log/chimera
 ENTRYPOINT ["./webapp"]
